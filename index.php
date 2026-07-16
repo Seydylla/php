@@ -16,13 +16,23 @@ $routes = [
 ];
 
 
+
 // Now we made just one line routing.
-if (array_key_exists($uri, $routes)) {
-    require $routes[$uri];
-} else {
+function routeToController($uri, $routes) {
+    if (array_key_exists($uri, $routes)) {
+        require $routes[$uri];
+    } else {
+        abort(404);
+    }
+}
+
+//function gor errors
+function abort($code) {
     http_response_code(404);
 
-    require 'views/404.php';
+    require "views/{$code}.php";
 
     die();
 }
+
+routeToController($uri, $routes);
