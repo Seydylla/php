@@ -6,19 +6,12 @@ class Database {
     public $connection;
 
     // Costruct always work
-    public function __construct(){
+    public function __construct($config, $username = 'root', $password = ''){
 
-        $config = [
-            'host' => 'localhost',
-            'port' => '3306',
-            'dbname' => 'myapp',
-            'charset' => 'utf8mb4'
-        ];
-
-        $dsn = "mysql:host={$config['host']};port={$config['port']};dbname={$config['dbname']};user=root;charset={$config['charset']}";
+        $dsn = 'mysql:' . http_build_query($config, '', ';');
 
         // Making like this for secure. We write the parameters for secure database connection
-        $this->connection = new PDO($dsn, 'root', '', [
+        $this->connection = new PDO($dsn, $username, $password, [
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
         ]);
     }
