@@ -2,8 +2,9 @@
 
 function dd($value) {
     echo "<pre>";
-        die(var_dump($value));
+        var_dump($value);
     echo "</pre>";
+    die();
 }
 
 function urlIs($value) {

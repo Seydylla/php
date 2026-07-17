@@ -1,0 +1,3 @@
+msql -root :: for use mysql command palette
+create database <name of the database>;
+opening mysql ant then we will work there.
