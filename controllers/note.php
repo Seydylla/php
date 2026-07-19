@@ -15,7 +15,10 @@ if(! $note) {
     abort();
 }
 
-if ($note['user_id'] !== 1) {
-    abort(403);
+$currentUserId = 1;
+$forbidden = 403;
+
+if ($note['user_id'] !== $currentUserId) {
+    abort($forbidden);
 }
 require 'views/note.view.php';
