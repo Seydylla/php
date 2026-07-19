@@ -7,11 +7,15 @@ $heading = 'Note';
 
 
 $note = $db->query('select * from notes where user_id = :user and id = :id', [
-    'user' => 1,
+    'user' => 3,
     'id' => $_GET['id']
 ])->fetch();
 
 if(! $note) {
     abort();
+}
+
+if ($note['user_id'] !== 1) {
+    abort(403);
 }
 require 'views/note.view.php';
