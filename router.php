@@ -26,7 +26,7 @@ function routeToController($uri, $routes) {
 }
 
 //function gor errors
-function abort($code) {
+function abort($code = 404) {
     http_response_code(404);
 
     require "views/{$code}.php";
