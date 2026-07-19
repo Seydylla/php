@@ -7,5 +7,5 @@ $heading = 'My Notes';
 
 $notes = [];
 
-$notes = $db->query('select * from notes where user_id = 3')->fetchAll();
+$notes = $db->query('select * from notes')->fetchAll();
 require 'views/notes.view.php';

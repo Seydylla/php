@@ -4,6 +4,7 @@ $config = require 'config.php';
 $db = new Database($config['database']);
 
 $heading = 'Note';
+$currentUserId = 3;
 
 
 $note = $db->query('select * from notes where user_id = :user and id = :id', [
@@ -15,10 +16,8 @@ if(! $note) {
     abort();
 }
 
-$currentUserId = 1;
-$forbidden = 403;
 
 if ($note['user_id'] !== $currentUserId) {
-    abort($forbidden);
+    abort(Response::FORBIDDEN);
 }
 require 'views/note.view.php';
