@@ -7,10 +7,9 @@ $heading = 'Note';
 $currentUserId = 3;
 
 
-$note = $db->query('select * from notes where user_id = :user and id = :id', [
-    'user' => 3,
+$note = $db->query('select * from notes where id = :id', [
     'id' => $_GET['id']
-])->fetch();
+])->findOrFail();
 
 if(! $note) {
     abort();
