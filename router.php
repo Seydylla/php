@@ -1,19 +1,6 @@
 <?php
 
-// Getting uri and storing it in a variable. (Adding parse_url is removeing or disallowing query's, so we can use reoute like this more secure)
-$uri = parse_url($_SERVER['REQUEST_URI']) ['path'];
-
-
-
-//Making an array to store routes.
-$routes = [
-    '/' => 'controllers/index.php',
-    '/about' => 'controllers/about.php',
-    '/notes' => 'controllers/notes.php',
-    '/note' => 'controllers/note.php',
-    '/contact' => 'controllers/contact.php',
-];
-
+$routes = require 'routes.php';
 
 
 // Now we made just one line routing.
@@ -33,5 +20,8 @@ function abort($code = 404) {
 
     die();
 }
+
+// Getting uri and storing it in a variable. (Adding parse_url is removeing or disallowing query's, so we can use reoute like this more secure)
+$uri = parse_url($_SERVER['REQUEST_URI']) ['path'];
 
 routeToController($uri, $routes);
