@@ -8,4 +8,4 @@ $heading = 'My Notes';
 $notes = [];
 
 $notes = $db->query('select * from notes')->fetchAll();
-require 'views/notes.view.php';
+require 'views/notes/index.view.php';
