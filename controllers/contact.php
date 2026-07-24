@@ -1,6 +1,5 @@
 <?php
 
-
-$heading = "Contact page";
-
-require base_path("views/contact.view.php");
+view('contact.view.php', [
+    'heading' => 'Contact'
+]);
