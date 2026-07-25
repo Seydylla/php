@@ -5,7 +5,8 @@ $db = new Database($config['database']);
 
 $heading = 'My Notes';
 
-$notes = [];
-
 $notes = $db->query('select * from notes')->fetchAll();
-require base_path('views/notes/index.view.php');
+view('notes/index.view.php', [
+    'heading' => 'My Notes',
+    'notes' => $notes
+]);

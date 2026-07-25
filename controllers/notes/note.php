@@ -13,4 +13,7 @@ $note = $db->query('select * from notes where id = :id', [
 
 authorize($note['user_id'] === $currentUserId);
 
-require base_path('views/notes/note.view.php');
+view('notes/note.view.php', [
+    'heading' => 'Create Notes',
+    'note' => $note
+]);
