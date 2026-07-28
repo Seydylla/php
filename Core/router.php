@@ -1,5 +1,7 @@
 <?php
 
+namespace Core;
+
 
 class Router {
 
@@ -44,6 +46,14 @@ class Router {
             'method' => 'PUT'
         ];
     }
+
+    public function route($uri) {
+        foreach($this->routes as $route) {
+            if($route['uri'] === $uri) {
+                return require base_path($route['controller']);
+            }
+        }
+    }
 }
 
 // // Now we made just one line routing.
@@ -65,9 +75,5 @@ class Router {
 //     die();
 // }
 
-// // Getting uri and storing it in a variable. (Adding parse_url is removeing or disallowing query's, so we can use reoute like this more secure)
-// // Getting the file
-// $routes = require base_path('routes.php');
-// $uri = parse_url($_SERVER['REQUEST_URI']) ['path'];
-
-// routeToController($uri, $routes);
+// Getting uri and storing it in a variable. (Adding parse_url is removeing or disallowing query's, so we can use reoute like this more secure)
+// Getting the file
