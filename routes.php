@@ -12,5 +12,3 @@
 
 $router->get('/', 'controllers/index.php');
 $router->delete('/note', 'controllers/note/destroy.php');
-
-dd($router->routes);

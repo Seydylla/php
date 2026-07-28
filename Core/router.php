@@ -47,9 +47,9 @@ class Router {
         ];
     }
 
-    public function route($uri, method) {
+    public function route($uri, $method) {
         foreach($this->routes as $route) {
-            if($route['uri'] === $uri) {
+            if($route['uri'] === $uri && $route['method'] === strtoupper($method)) {
                 return require base_path($route['controller']);
             }
         }
@@ -66,6 +66,3 @@ class Router {
         die();
     }
 }
-
-// Getting uri and storing it in a variable. (Adding parse_url is removeing or disallowing query's, so we can use reoute like this more secure)
-// Getting the file
