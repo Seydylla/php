@@ -24,7 +24,7 @@ class Router {
     }
 
     public function delete($uri, $controller) {
-        $this->add('Delete', $uri, $controller);
+        $this->add('DELETE', $uri, $controller);
     }
 
     public function patch($uri, $controller) {
@@ -45,7 +45,6 @@ class Router {
         $this->abort();
     }
 
-    //function gor errors
     protected function abort($code = 404) {
         http_response_code(404);
 
