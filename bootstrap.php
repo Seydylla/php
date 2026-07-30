@@ -11,6 +11,3 @@ $container->bind('Core\Database', function() {
 });
 
 $db = $container->resolve('Core\Database');
-// $container->resolve('asdfasdfasdfasdfasd');
-
-dd($db);
