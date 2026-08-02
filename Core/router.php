@@ -11,7 +11,8 @@ class Router {
         $this->routes[] = [
             'uri' => $uri,
             'controller' => $controller,
-            'method' => $method
+            'method' => $method,
+            'middleware' => null
         ];
 
         return $this;
@@ -38,11 +39,29 @@ class Router {
     }
 
     public function only($key) {
-        dd($key);
+        $this->routes[array_key_last($this->routes)]['middleware'] = $key;
+        return $this;
     }
 
     public function route($uri, $method) {
         foreach($this->routes as $route) {
+
+            //Apply the middleware
+
+            if($route['middleware'] === 'guest') {
+                if($_SESSION['user'] ?? false) {
+                    header('Location: /');
+                    exit;
+                }
+            }
+
+            if($route['middleware'] === 'auth') {
+                if(!($_SESSION['user'] ?? false)) {
+                    header('Location: /');
+                    exit;
+                }
+            }
+
             if($route['uri'] === $uri && $route['method'] === strtoupper($method)) {
                 return require base_path($route['controller']);
             }
