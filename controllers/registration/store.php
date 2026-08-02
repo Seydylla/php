@@ -26,8 +26,23 @@ if(! empty($errors)) {
 $db = App::resolve(Database::class);
 
 // Check if the account already exists
-$result = $db->query('select * from users where email = :email', [
+$user = $db->query('select * from users where email = :email', [
     'email' => $email
 ])->find();
 
-dd($result);
+if ($user) {
+    header('location: /');
+} else {
+    // Create the account
+    $db->query('insert into users(email, password) values (:email, :password)', [
+        'email' => $email,
+        'password' => $password
+    ]);
+
+    $_SESSION['user'] = [
+        'email' => $email
+    ];
+
+    header('location: /');
+    exit();
+}
