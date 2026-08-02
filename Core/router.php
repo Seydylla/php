@@ -47,17 +47,13 @@ class Router {
     public function route($uri, $method) {
         foreach($this->routes as $route) {
 
-        if($route['uri'] === $uri && $route['method'] === strtoupper($method)) {
+            if($route['uri'] === $uri && $route['method'] === strtoupper($method)) {
 
-            //Apply the middleware
+                //Apply the middleware
 
-            if($route['middleware']) {
-                $middleware = Middleware::MAP[$route['middleware']];
+                Middleware::resolve($route['middleware']);
 
-                (new $middleware)->handle();
-            }
-
-            return require base_path($route['controller']);
+                return require base_path($route['controller']);
             }
         }
 
