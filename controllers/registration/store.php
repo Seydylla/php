@@ -1,5 +1,7 @@
 <?php
 
+use Core\App;
+use Core\Database;
 use Core\Validator;
 
 $email = $_POST['email'];
@@ -20,3 +22,12 @@ if(! empty($errors)) {
         'errors' => $errors
     ]);
 }
+
+$db = App::resolve(Database::class);
+
+// Check if the account already exists
+$result = $db->query('select * from users where email = :email', [
+    'email' => $email
+])->find();
+
+dd($result);
