@@ -41,7 +41,8 @@
                   </el-menu>
               </el-dropdown>
             <?php else : ?>
-              <a href="/register" class="text-sm font-medium text-gray-300 hover:text-white ml-3">Register</a>
+              <a href="/register" class="<?= urlIs('/register') ? 'rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white dark:bg-gray-950/50' : 'rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white'; ?>">Register</a>
+              <a href="/login" class="<?= urlIs('/login') ? 'rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white dark:bg-gray-950/50' : 'rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white'; ?>">Log in</a>
             <?php endif; ?>
           </div>
         </div>
