@@ -47,7 +47,7 @@
 
             <?php if ($_SESSION['user'] ?? false) : ?>
               <div class="ml-3 mt-3">
-                <form action="/" method="POST">
+                <form action="/logout" method="POST">
                   <input type="hidden" name="_method" value="DELETE">
 
                   <button type="submit" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Log out</button>
