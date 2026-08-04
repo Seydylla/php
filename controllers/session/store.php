@@ -29,25 +29,20 @@ $user = $db->query('select * from users where email = :email', [
     'email' => $email
 ])->find();
 
-if(! $user) {
-    return view('session/create.view.php', [
-        'errors' => [
-            'email' => 'No matching email found'
-        ]
-    ]);
+if($user) {
+
+    if(password_verify($password, $user['password'])) {
+        login([
+            'email' => $email
+        ]);
+
+        header('location: /');
+        exit();
+    }
 }
-
-if(password_verify($password, $user['password'])) {
-    login([
-        'email' => $email
-    ]);
-
-    header('location: /');
-    exit();
-} 
 
 return view('session/create.view.php', [
     'errors' => [
-        'password' => 'Password is incorrect'
+        'email' => 'No matching account found for that email address and password'
     ]
 ]);

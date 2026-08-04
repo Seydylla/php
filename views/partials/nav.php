@@ -44,8 +44,19 @@
               <a href="/register" class="<?= urlIs('/register') ? 'rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white dark:bg-gray-950/50' : 'rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white'; ?>">Register</a>
               <a href="/login" class="<?= urlIs('/login') ? 'rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white dark:bg-gray-950/50' : 'rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white'; ?>">Log in</a>
             <?php endif; ?>
+
+            <?php if ($_SESSION['user'] ?? false) : ?>
+              <div class="ml-3 mt-3">
+                <form action="/" method="POST">
+                  <input type="hidden" name="_method" value="DELETE">
+
+                  <button type="submit" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Log out</button>
+                </form>
+              </div>
+            <?php endif; ?>
           </div>
         </div>
+
         <div class="-mr-2 flex md:hidden">
           <!-- Mobile menu button -->
           <button type="button" command="--toggle" commandfor="mobile-menu" class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-white/5 hover:text-white focus:outline-2 focus:outline-offset-2 focus:outline-indigo-500">
