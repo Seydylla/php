@@ -2,6 +2,7 @@
 
 use Core\App;
 use Core\Database;
+use Core\Validator;
 
 $db = App::resolve(Database::class);
 
@@ -14,15 +15,29 @@ if(! Validator::email($email)) {
     $errors['email'] = 'A valid email is required';
 }
 
-if(! Validator::string($password, 7, 255)) {
-    $errors['password'] = 'A password of at least 7 charachters is required';
+if(! Validator::string($password)) {
+    $errors['password'] = 'AProvide valid password';
 }
 
 if(! empty($errors)) {
-    return view('registration/create.view.php', [
+    return view('session/create.view.php', [
         'errors' => $errors
     ]);
 }
+
+$user = $db->query('select * from users where email = :email', [
+    'email' => $email
+])->find();
+
+if(! $user) {
+    return view('session/create.view.php', [
+        'errors' => [
+            'email' => 'No matching email found'
+        ]
+    ]);
+}
+
+dd($user);
 
 login([
     'email' => $email
