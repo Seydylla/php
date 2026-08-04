@@ -37,8 +37,17 @@ if(! $user) {
     ]);
 }
 
-dd($user);
+if(password_verify($password, $user['password'])) {
+    login([
+        'email' => $email
+    ]);
 
-login([
-    'email' => $email
+    header('location: /');
+    exit();
+} 
+
+return view('session/create.view.php', [
+    'errors' => [
+        'password' => 'Password is incorrect'
+    ]
 ]);
