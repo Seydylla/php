@@ -2,5 +2,5 @@
 
 view('session/create.view.php', [
     'title' => 'Log in',
-    'errors' => $_SESSION['errors'] ?? []
+    'errors' => $_SESSION['_flash']['errors'] ?? []
 ]);
