@@ -22,8 +22,7 @@ if(! $form->validate($email, $password)) {
 $auth = new Authenticator();
 
 if($auth->attempt($email, $password)) {
-    header('location: /');
-    exit();
+    redirect('/');
 } else {
     return view('session/create.view.php', [
         'errors' => [
