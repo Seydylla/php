@@ -16,6 +16,7 @@ spl_autoload_register(function($class) {
 use Core\App;
 use Core\Container;
 use Core\Database;
+use Core\Session;
 
 $container = new Container();
 
@@ -38,4 +39,4 @@ $method = $_POST['_method'] ?? $_SERVER['REQUEST_METHOD'];
 
 $router->route($uri, $method);
 
-unset($_SESSION['_flash']['errors']);
+Session::unflash();
