@@ -13,7 +13,7 @@ class LoginForm{
         }
 
         if(! Validator::string($password)) {
-            $this->errors['password'] = 'AProvide valid password';
+            $this->errors['password'] = 'Provide a valid password';
         }
 
         return empty($this->errors);
@@ -21,5 +21,9 @@ class LoginForm{
 
     public function errors(){
         return $this->errors;
+    }
+
+    public function error($field, $message){
+        $this->errors[$field] = $message;
     }
 }
