@@ -7,7 +7,10 @@ use Core\ValidationException;
 class LoginForm{
     protected $errors = [];
 
-    public function __construct($attributes) {
+    public function __construct(public array $attributes) {
+
+        $this->attributes = $attributes;
+
         if(! Validator::email($attributes['email'] ?? '')) {
             $this->errors['email'] = 'A valid email is required';
         }
@@ -22,7 +25,7 @@ class LoginForm{
         $instance = new static($attributes);
 
         if($instance->failed()) {
-            ValidationException::throw($instance->errors());
+            ValidationException::throw($instance->errors(), $instance->attributes);
         }
 
         return $instance;
